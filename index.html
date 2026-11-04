@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Construction Change Order Evidence Pack — Free PDF + SHA-256 Checklist</title>
+  <meta name="description" content="Turn a construction change order and job photos into one printable PDF record, plus a SHA-256 checksum you can re-check later. Runs entirely in your browser. No account, no upload.">
+  <link rel="canonical" href="https://construction-change-order-evidence.vercel.app/">
+  <meta name="robots" content="index,follow">
+  <meta property="og:title" content="Construction Change Order Evidence Pack">
+  <meta property="og:description" content="Build a printable change order record with photos and a SHA-256 checksum, locally in your browser.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://construction-change-order-evidence.vercel.app/">
+  <meta name="theme-color" content="#f6f2e9">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#tool">Skip to the tool</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="Construction Change Order Evidence Pack home">
+        <span class="brand-mark" aria-hidden="true">CO</span>
+        <span class="brand-text">Change Order<br><strong>Evidence Pack</strong></span>
+      </a>
+      <nav aria-label="Main">
+        <a href="#tool">Tool</a>
+        <a href="#how">How it works</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">For small contractors and subcontractors</p>
+        <h1>Turn a change order and job photos into one evidence pack.</h1>
+        <p class="lede">Fill in the change, attach the photos, and get a printable PDF record plus a SHA-256 checksum manifest — without an account and without uploading the job file.</p>
+        <ul class="badges" aria-label="Privacy and access">
+          <li>No upload</li>
+          <li>No account</li>
+          <li>No email required</li>
+          <li>Free</li>
+        </ul>
+      </div>
+      <aside class="hero-note">
+        <p class="note-label">What it produces</p>
+        <ol>
+          <li>A US-Letter PDF with the change details, amount, schedule impact, notes, photos and blank signature lines.</li>
+          <li>A plain-text manifest listing the PDF’s byte size and SHA-256.</li>
+          <li>A local checker to compare a later copy with that hash.</li>
+        </ol>
+        <p class="micro">Everything is computed on your device. The page makes no network requests after it loads.</p>
+      </aside>
+    </section>
+
+    <section id="tool" class="tool-shell" aria-labelledby="tool-title">
+      <div class="tool-heading">
+        <div>
+          <p class="eyebrow">The tool</p>
+          <h2 id="tool-title">Build the pack</h2>
+        </div>
+        <p class="tool-hint">Required fields are marked <span class="req">*</span>. Nothing is saved to this website.</p>
+      </div>
+
+      <form id="packForm" novalidate autocomplete="off">
+        <fieldset>
+          <legend>Project and change order</legend>
+          <div class="grid two">
+            <div class="field">
+              <label for="project">Project name <span class="req">*</span></label>
+              <input id="project" name="project" type="text" maxlength="160" placeholder="Riverside Apartments — Building B" required>
+              <p class="error" id="project-error" hidden></p>
+            </div>
+            <div class="field">
+              <label for="coNumber">Change order number <span class="req">*</span></label>
+              <input id="coNumber" name="coNumber" type="text" maxlength="60" placeholder="CO-2026-014" required>
+              <p class="error" id="coNumber-error" hidden></p>
+            </div>
+            <div class="field">
+              <label for="changeDate">Date of change <span class="req">*</span></label>
+              <input id="changeDate" name="changeDate" type="date" required>
+              <p class="error" id="changeDate-error" hidden></p>
+            </div>
+            <div class="field">
+              <label for="contractor">Contractor / prepared by <span class="optional">(optional)</span></label>
+              <input id="contractor" name="contractor" type="text" maxlength="120" placeholder="Northline Builders LLC">
+            </div>
+            <div class="field">
+              <label for="client">Client / owner <span class="optional">(optional)</span></label>
+              <input id="client" name="client" type="text" maxlength="120" placeholder="Riverside Property Group">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>What changed</legend>
+          <div class="field">
+            <label for="description">Work description <span class="req">*</span></label>
+            <textarea id="description" name="description" rows="4" maxlength="4000" placeholder="Describe the added, removed or changed work. Include locations and quantities where you can." required></textarea>
+            <p class="hint">Plain text. Line breaks are preserved in the PDF.</p>
+            <p class="error" id="description-error" hidden></p>
+          </div>
+          <div class="field">
+            <label for="reason">Reason for the change <span class="req">*</span></label>
+            <textarea id="reason" name="reason" rows="3" maxlength="2500" placeholder="Why was this change needed? For example: existing outlet locations conflicted with the new cabinet layout." required></textarea>
+            <p class="error" id="reason-error" hidden></p>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Money and schedule</legend>
+          <div class="grid three">
+            <div class="field">
+              <label for="amount">Amount change</label>
+              <input id="amount" name="amount" type="number" step="0.01" inputmode="decimal" placeholder="1850.00">
+              <p class="hint">Use a negative number for a credit.</p>
+              <p class="error" id="amount-error" hidden></p>
+            </div>
+            <div class="field">
+              <label for="currency">Currency</label>
+              <select id="currency" name="currency">
+                <option value="USD">USD — US dollar</option>
+                <option value="EUR">EUR — euro</option>
+                <option value="GBP">GBP — pound sterling</option>
+                <option value="CAD">CAD — Canadian dollar</option>
+                <option value="AUD">AUD — Australian dollar</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="scheduleDays">Schedule impact (days)</label>
+              <input id="scheduleDays" name="scheduleDays" type="number" step="1" inputmode="numeric" placeholder="3">
+              <p class="hint">Positive = delay. Negative = earlier.</p>
+              <p class="error" id="scheduleDays-error" hidden></p>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Notes and confirmation record</legend>
+          <div class="field">
+            <label for="notes">Notes <span class="optional">(optional)</span></label>
+            <textarea id="notes" name="notes" rows="4" maxlength="3000" placeholder="Who approved what, by which channel, and when. Example: Site superintendent approved verbally on Nov 3; client asked for written confirmation by email."></textarea>
+            <p class="hint">This is your written note. It is not a verified message log.</p>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Photos and captions</legend>
+          <div id="dropZone" class="drop-zone" tabindex="0" role="button" aria-controls="photoInput">
+            <p><strong>Choose photos</strong> or drop them here</p>
+            <p class="hint">JPEG, PNG or WebP · up to 12 photos · max 25 MB each</p>
+            <input id="photoInput" type="file" accept="image/jpeg,image/png,image/webp,image/*" multiple hidden>
+          </div>
+          <p class="hint photo-note">Each photo is resized to a 1600 px long edge and re-encoded as JPEG in your browser. EXIF metadata, including GPS location where present, is removed. The embedded copy changes; keep your originals.</p>
+          <ul id="photoList" class="photo-list" aria-live="polite"></ul>
+        </fieldset>
+
+        <div class="form-actions">
+          <button id="generateBtn" class="primary" type="submit">Generate PDF + checksum manifest</button>
+          <button id="clearBtn" class="secondary" type="button">Clear all</button>
+          <span id="formStatus" class="form-status" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+
+      <section id="resultPanel" class="result-panel" hidden aria-labelledby="result-title">
+        <p class="eyebrow">Export complete</p>
+        <h3 id="result-title">Your evidence pack is ready</h3>
+        <p id="resultSummary">Two files were sent to your downloads.</p>
+        <dl class="result-grid">
+          <div><dt>PDF</dt><dd id="resultFile">—</dd></div>
+          <div><dt>Size</dt><dd id="resultSize">—</dd></div>
+          <div><dt>Pages</dt><dd id="resultPages">—</dd></div>
+          <div><dt>Manifest</dt><dd id="resultManifest">—</dd></div>
+        </dl>
+        <div class="hash-row">
+          <span class="hash-label">PDF SHA-256</span>
+          <code id="resultHash">—</code>
+          <button id="copyHash" class="small" type="button">Copy</button>
+        </div>
+        <div class="result-actions">
+          <button id="downloadPdfAgain" class="secondary" type="button">Download PDF again</button>
+          <button id="downloadManifestAgain" class="secondary" type="button">Download manifest again</button>
+          <a class="text-link" href="#verify">Verify a file later →</a>
+        </div>
+        <p class="micro">Keep the PDF and the manifest together. The manifest’s hash refers to the PDF file only, not to a zip archive.</p>
+      </section>
+
+      <section id="verify" class="verify-panel" aria-labelledby="verify-title">
+        <div>
+          <p class="eyebrow">Local check</p>
+          <h3 id="verify-title">Verify a file later</h3>
+          <p>Select the PDF you exported and paste the SHA-256 from its manifest. The comparison happens in this browser; the file is not uploaded.</p>
+        </div>
+        <div class="verify-controls">
+          <div class="field">
+            <label for="verifyFile">File to check</label>
+            <input id="verifyFile" type="file">
+          </div>
+          <div class="field">
+            <label for="expectedHash">Expected SHA-256</label>
+            <input id="expectedHash" type="text" spellcheck="false" autocomplete="off" placeholder="64 hexadecimal characters">
+            <p class="error" id="expectedHash-error" hidden></p>
+          </div>
+          <div class="verify-actions">
+            <button id="verifyBtn" class="secondary" type="button">Compare</button>
+            <button id="useLastHash" class="text-button" type="button" hidden>Use hash from this session</button>
+          </div>
+          <div id="verifyResult" class="verify-result" role="status" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <p class="local-stats" id="localStats">Local use on this device: no packs generated yet.</p>
+      <div class="useful-row">
+        <button id="usefulBtn" class="text-button" type="button">This was useful</button>
+        <span id="usefulNote" class="micro">Counted only in this browser. Nothing is sent.</span>
+      </div>
+    </section>
+
+    <section id="how" class="content-section">
+      <p class="eyebrow">What you get</p>
+      <h2>A record you can print, file and re-check.</h2>
+      <div class="cards">
+        <article class="card">
+          <span class="card-num">01</span>
+          <h3>Change order details</h3>
+          <p>Project, change order number, date, contractor and client, the work description, the reason, the amount change and the schedule impact.</p>
+        </article>
+        <article class="card">
+          <span class="card-num">02</span>
+          <h3>Photos with captions</h3>
+          <p>Up to 12 photos, each with a short caption. Photos are re-encoded in the browser to remove EXIF/GPS metadata and capped at a 1600 px long edge.</p>
+        </article>
+        <article class="card">
+          <span class="card-num">03</span>
+          <h3>Written confirmation block</h3>
+          <p>Blank lines for handwritten signatures, printed names and dates. The tool does not create or verify electronic signatures or identity.</p>
+        </article>
+        <article class="card">
+          <span class="card-num">04</span>
+          <h3>Checksum manifest</h3>
+          <p>A plain-text file with the PDF’s exact filename, byte size and SHA-256, plus instructions for checking a later copy.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-section split">
+      <div>
+        <p class="eyebrow">How the checksum works</p>
+        <h2>One hash for one file.</h2>
+        <p>The tool computes SHA-256 over the finished PDF bytes. If a later copy has the same SHA-256, its bytes match the exported file. If even one byte changes, the hash changes and the check fails.</p>
+        <p>The manifest hashes the PDF only. It does not hash a zip archive, because no zip is produced. It also does not hash your original photos: those were re-encoded before being embedded, so the PDF is the file being tracked.</p>
+      </div>
+      <div class="callout">
+        <p class="callout-label">Important boundary</p>
+        <p>This tool organizes records and computes file checksums in your browser. It does not prove what happened, when a photo was taken, who signed it, or legal admissibility. No trusted timestamp or legal certification is provided.</p>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <p class="eyebrow">Who it is for</p>
+      <h2>Small crews with scattered change records.</h2>
+      <p class="prose">A change order often lives in a text thread, an email, a paper note and a phone album. When the client questions the extra work, the office has to reconstruct the story. This page turns one change order into a single PDF with the photos already attached, then gives you a checksum so you can tell whether the file you send next month is still the file you exported today.</p>
+      <p class="prose">It is designed for small general contractors, subcontractors and trades that do not want another per-user field platform. It does not replace a full project management system, an accounting package or legal advice.</p>
+    </section>
+
+    <section class="content-section faq">
+      <p class="eyebrow">Questions</p>
+      <h2>Straight answers</h2>
+      <details>
+        <summary>Do you upload my project data or photos?</summary>
+        <p>No. The form fields and photos are processed in your browser. The page has a Content-Security-Policy that blocks outbound connections, and there is no analytics or third-party script. See the <a href="/privacy">privacy page</a> for what the static host may log.</p>
+      </details>
+      <details>
+        <summary>Does the SHA-256 prove the photo was taken on a certain date?</summary>
+        <p>No. It proves that a file’s bytes match the hash recorded at export. It does not establish when the photo was taken, who took it, or whether the content is true. The PDF records the device’s local generation time, which is not an external trusted timestamp.</p>
+      </details>
+      <details>
+        <summary>What happens to GPS and other EXIF data in my photos?</summary>
+        <p>Each photo is drawn to a canvas, resized so its long edge is at most 1600 px, and encoded as a new JPEG at quality 0.85. Canvas encoding does not carry the source EXIF block, so GPS and other camera metadata are not included in the PDF. This changes the image bytes and may reduce detail; keep the originals separately.</p>
+      </details>
+      <details>
+        <summary>Can I use Chinese or other non-Latin text?</summary>
+        <p>The PDF uses the built-in Helvetica font, which covers Latin characters. Characters outside that set are shown as “?” and the tool warns you before export. Use Latin text for the PDF, or attach a translated note.</p>
+      </details>
+      <details>
+        <summary>Is this legal advice or a substitute for a contract?</summary>
+        <p>No. It is a record-organizing tool. It does not decide whether a change is valid, whether a signature is authorized, or whether a document will be accepted in a dispute. Consult a qualified professional for your situation.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand">Change Order Evidence Pack</p>
+        <p class="micro">An independent browser-local tool. Not affiliated with Raken, CompanyCam or Contractor Foreman.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="#tool">Tool</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+    <p class="footer-disclaimer">This tool organizes records and computes file checksums in your browser. It does not prove what happened, when a photo was taken, who signed it, or legal admissibility. No trusted timestamp or legal certification is provided.</p>
+  </footer>
+
+  <script type="module" src="/assets/app.mjs"></script>
+</body>
+</html>
