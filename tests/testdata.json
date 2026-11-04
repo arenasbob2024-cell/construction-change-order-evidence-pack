@@ -1,0 +1,23 @@
+{
+  "project": "Riverside Apartments - Building B",
+  "coNumber": "CO-2026-014",
+  "changeDate": "2026-11-04",
+  "contractor": "Northline Builders LLC",
+  "client": "Riverside Property Group",
+  "description": "Relocate two electrical outlets in Unit 4B from the north wall to the new island wall, add one dedicated 20A circuit for the microwave, and patch and paint the affected drywall. Work includes permit coordination and final inspection.",
+  "reason": "The cabinet layout changed after the electrical rough-in. The original outlet locations conflict with the new island and would be inaccessible after cabinet installation.",
+  "amount": 1850,
+  "currency": "USD",
+  "scheduleDays": 3,
+  "notes": "Site superintendent approved the relocation verbally on Nov 3. Client project manager asked for a written record by email the same day. Final inspection is scheduled after cabinet install.",
+  "photos": [
+    {
+      "file": "photo_gps.jpg",
+      "caption": "North wall before relocation - outlets conflict with the new island layout."
+    },
+    {
+      "file": "photo_plain.jpg",
+      "caption": "New island wall after rough-in, looking east."
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+tests/
+node_modules/
+tests/artifacts/
+tests/node_modules/
+*.pyc
+.DS_Store

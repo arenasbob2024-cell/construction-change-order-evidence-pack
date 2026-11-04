@@ -1,0 +1,6 @@
+.DS_Store
+.vercel
+tests/node_modules/
+tests/artifacts/
+__pycache__/
+*.pyc

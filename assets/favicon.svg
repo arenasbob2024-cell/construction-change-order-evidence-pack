@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Change Order Evidence Pack">
+  <rect width="64" height="64" fill="#17202a"/>
+  <rect x="0" y="56" width="64" height="8" fill="#b45309"/>
+  <text x="32" y="41" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#fffdf7" text-anchor="middle" letter-spacing="1">CO</text>
+</svg>
