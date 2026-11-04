@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy — Construction Change Order Evidence Pack</title>
+  <meta name="description" content="How this browser-local change order tool handles project data, photos, EXIF metadata, local counters and hosting logs.">
+  <link rel="canonical" href="https://construction-change-order-evidence.vercel.app/privacy">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#f6f2e9">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="Construction Change Order Evidence Pack home">
+        <span class="brand-mark" aria-hidden="true">CO</span>
+        <span class="brand-text">Change Order<br><strong>Evidence Pack</strong></span>
+      </a>
+      <nav aria-label="Main">
+        <a href="/#tool">Tool</a>
+        <a href="/#how">How it works</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <a class="back-link" href="/">← Back to the tool</a>
+    <p class="eyebrow">Privacy</p>
+    <h1>Your project file stays in your browser.</h1>
+    <p class="lede">This page explains what is processed, what is stored, and what the static host can see. Last reviewed: November 4, 2026.</p>
+
+    <h2>Short version</h2>
+    <ul>
+      <li>No account, email address, contact form, payment form or newsletter signup.</li>
+      <li>No analytics script, advertising script, cookie or third-party request.</li>
+      <li>Project fields and photos are processed in the browser and are never uploaded by this tool.</li>
+      <li>The page’s Content-Security-Policy sets <code>connect-src 'none'</code>, so the page itself cannot make outbound data connections.</li>
+      <li>Refreshing or closing the page clears the form and the attached photos from the page. The only files that remain are the PDF and manifest you download.</li>
+    </ul>
+
+    <h2>What is processed in your browser</h2>
+    <p>The project name, change order number, date, contractor, client, work description, reason, amount, schedule impact, notes and photo captions are used to draw a PDF. The PDF is produced locally with a small built-in writer; the text is not sent to a server for rendering.</p>
+    <p>Photos are decoded by the browser, drawn to a canvas, resized so the long edge is at most 1600 pixels, and encoded as a new JPEG at quality 0.85. Canvas encoding does not carry the source EXIF block, so GPS coordinates and other camera metadata are not included in the embedded copy. This process changes the image bytes and may reduce detail. The original files are not uploaded or retained by the tool; keep them separately if you need the original capture data.</p>
+
+    <h2>Checksums and the manifest</h2>
+    <p>The PDF’s SHA-256 is computed with the browser’s Web Crypto API. The downloaded manifest contains the PDF filename, byte size and hash, plus the project and change order labels you entered. The manifest is a local file you control; it is not sent anywhere by this page.</p>
+    <p>The hash is an integrity check for the exported PDF. It is not a trusted timestamp and does not certify who created the file or whether its contents are accurate.</p>
+
+    <h2>Local counters</h2>
+    <p>To keep a minimal record without tracking people, the page can store four numeric counters in your browser’s <code>localStorage</code> under the key <code>coep_local_stats_v1</code>:</p>
+    <ul>
+      <li><code>pack_generated</code> — a pack was generated on this device;</li>
+      <li><code>verify_run</code> — a file check was run;</li>
+      <li><code>verify_match</code> — a check matched;</li>
+      <li><code>useful_click</code> — the “This was useful” button was used.</li>
+    </ul>
+    <p>These are numbers only. They never include a project name, amount, note, photo, filename, hash or location, and they are never transmitted. Clearing site data in your browser removes them. If storage is unavailable, the counters simply do not persist.</p>
+
+    <h2>Hosting and standard logs</h2>
+    <p>The site is served as static files by Vercel. Like most hosting providers, Vercel may process standard request metadata — such as IP address, user agent, requested path and timestamp — to deliver the site, prevent abuse and keep service logs. This site does not add an analytics product and does not have a dashboard that associates those requests with your project data. Because your project fields and photos never leave the browser, they are not part of any request.</p>
+
+    <h2>What this page does not do</h2>
+    <ul>
+      <li>It does not sell, rent or share personal information.</li>
+      <li>It does not create user profiles or set advertising cookies.</li>
+      <li>It does not ask for a phone number, email address or payment details.</li>
+      <li>It does not upload photos for “processing” or “verification”.</li>
+    </ul>
+
+    <h2>Changes</h2>
+    <p>If the data handling changes, this page will be updated before the change ships. The review date at the top shows the last revision. This is an independent tool; there is no account to delete because there are no accounts.</p>
+
+    <p class="micro">Questions about the boundary between a record and a legal exhibit are not answered by this page. Consult a qualified professional for your situation.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand">Change Order Evidence Pack</p>
+        <p class="micro">An independent browser-local tool. Not affiliated with Raken, CompanyCam or Contractor Foreman.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="/#tool">Tool</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+    <p class="footer-disclaimer">This tool organizes records and computes file checksums in your browser. It does not prove what happened, when a photo was taken, who signed it, or legal admissibility. No trusted timestamp or legal certification is provided.</p>
+  </footer>
+</body>
+</html>

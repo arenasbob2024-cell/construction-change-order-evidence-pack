@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About — Construction Change Order Evidence Pack</title>
+  <meta name="description" content="What this browser-local change order record tool does, what it deliberately does not do, and how its checksum and photo handling work.">
+  <link rel="canonical" href="https://construction-change-order-evidence.vercel.app/about">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#f6f2e9">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="Construction Change Order Evidence Pack home">
+        <span class="brand-mark" aria-hidden="true">CO</span>
+        <span class="brand-text">Change Order<br><strong>Evidence Pack</strong></span>
+      </a>
+      <nav aria-label="Main">
+        <a href="/#tool">Tool</a>
+        <a href="/#how">How it works</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <a class="back-link" href="/">← Back to the tool</a>
+    <p class="eyebrow">About</p>
+    <h1>A smaller way to keep a change order together.</h1>
+    <p class="lede">A free, browser-local tool for turning one change order and its photos into a printable record with a checksum you can re-check later.</p>
+
+    <h2>Why it exists</h2>
+    <p>On a small job, a change order rarely lives in one place. The scope change is in a text message, the approval is in an email, the measurements are on a paper note, and the proof is in a phone album. By the time someone asks “what did we agree to?”, the office is reconstructing the story from four apps.</p>
+    <p>Dedicated field platforms solve this well, but they are built around per-user subscriptions and a full project workflow. This page takes a narrower job: one change order, one PDF, one checksum. No account, no upload, no new system to administer.</p>
+
+    <h2>What the tool does</h2>
+    <ul>
+      <li>Collects the project, change order number, date, contractor, client, work description, reason, amount change, schedule impact and notes.</li>
+      <li>Accepts up to 12 photos, each with a caption, resized and re-encoded in the browser so EXIF/GPS metadata is not carried into the PDF.</li>
+      <li>Draws a US-Letter PDF with a blank handwritten signature block.</li>
+      <li>Computes the PDF’s SHA-256 and writes a plain-text manifest with the filename, byte size and hash.</li>
+      <li>Lets you select a later copy of the PDF and compare its hash locally.</li>
+    </ul>
+
+    <h2>What it deliberately does not do</h2>
+    <ul>
+      <li>It does not upload or store your project file.</li>
+      <li>It does not create, apply or verify electronic signatures or identity.</li>
+      <li>It does not provide a trusted timestamp, notarization or legal certification.</li>
+      <li>It does not decide whether a change is authorized, whether an amount is correct, or whether a document will be accepted in a dispute.</li>
+      <li>It does not replace a contract, accounting system, project management platform or professional advice.</li>
+    </ul>
+
+    <h2>How the checksum is meant to be read</h2>
+    <p>SHA-256 is a one-way digest of a file’s bytes. If the later file is byte-identical, the hash matches; if a single byte changes, it does not. That is useful for spotting a re-saved, edited or damaged copy. It does not establish when the file was created, who created it, or whether the events described in it happened. The PDF records the device’s local generation time for context only; it is not an external timestamp.</p>
+    <p>For a plain-language reference on how electronic records and authentication are treated in US federal evidence rules, see <a href="https://www.law.cornell.edu/rules/fre/rule_902" rel="noopener noreferrer">FRE 902</a>. That reference is provided for orientation, not as legal advice. Authentication is only one of several separate questions a dispute can raise.</p>
+
+    <h2>Technical transparency</h2>
+    <ul>
+      <li>The PDF is written by a small in-page writer using the PDF base-14 Helvetica fonts. It has no third-party JavaScript dependency.</li>
+      <li>Photos are decoded, drawn to a canvas, capped at a 1600 px long edge and encoded as JPEG at quality 0.85. This removes EXIF metadata and changes the image bytes.</li>
+      <li>Hashes use the browser’s Web Crypto API. No hash or file is sent to a server.</li>
+      <li>The site has no backend, database, account system, email capture, payment flow or third-party script.</li>
+      <li>The page is static and served from a free <code>vercel.app</code> address.</li>
+    </ul>
+
+    <h2>Who maintains it</h2>
+    <p>This is an independent, small-scope project maintained by its authors. It is not affiliated with Raken, CompanyCam, Contractor Foreman or any other field-documentation vendor mentioned on the page. Names are used only to describe the category of tools a small crew might compare.</p>
+
+    <p class="micro">Last reviewed: November 4, 2026. If you need a record for a legal proceeding, keep the original files and speak with a qualified professional.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand">Change Order Evidence Pack</p>
+        <p class="micro">An independent browser-local tool. Not affiliated with Raken, CompanyCam or Contractor Foreman.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="/#tool">Tool</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+    <p class="footer-disclaimer">This tool organizes records and computes file checksums in your browser. It does not prove what happened, when a photo was taken, who signed it, or legal admissibility. No trusted timestamp or legal certification is provided.</p>
+  </footer>
+</body>
+</html>
