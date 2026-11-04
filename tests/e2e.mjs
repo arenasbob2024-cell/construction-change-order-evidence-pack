@@ -147,7 +147,7 @@ try {
   check("verify widget detects change", (await page.textContent("#verifyResult")).includes("DOES NOT MATCH"));
 
   const external = requests.filter((request) => !request.url.startsWith(base) && !request.url.startsWith("data:") && !request.url.startsWith("blob:"));
-  const writes = requests.filter((request) => !["GET", "HEAD", "OPTIONS"].includes(request.method()));
+  const writes = requests.filter((request) => !["GET", "HEAD", "OPTIONS"].includes(request.method));
   check("no third-party requests", external.length === 0, JSON.stringify(external.slice(0, 4)));
   check("no write requests", writes.length === 0, JSON.stringify(writes.slice(0, 4)));
   check("no console errors", consoleErrors.length === 0, JSON.stringify(consoleErrors.slice(0, 4)));
